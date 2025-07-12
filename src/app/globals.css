@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: oklch(0.9879 0.0059 223.45);
+	--foreground: oklch(0.1817 0.0295 234.01);
+	--primary: oklch(0.6553 0.1463 244.33);
+	--secondary: oklch(0.7201 0.1184 270.84);
+	--accent: oklch(0.5262 0.2243 275.2);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-accent: var(--accent);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: "Geist", sans-serif;
+}
+@layer base {
+	input {
+		@apply outline-none border-none ring-1 ring-accent p-2 rounded-md;
+	}
+}
+@layer components {
+	.custom_container {
+		width: 100%;
+		padding: 0 5px;
+		margin: 0 auto;
+	}
+	.primary {
+		@apply bg-primary text-white hover:bg-primary/95;
+	}
+	.secondary {
+		@apply border border-primary text-primary;
+	}
+	.leaflet-container {
+		width: 100%;
+		height: 60vh;
+		border-radius: 0.5rem;
+	}
+}
+
+@media (min-width: 48rem) {
+	.custom_container {
+		max-width: 40rem;
+	}
+}
+@media (min-width: 64rem) {
+	.custom_container {
+		max-width: 56rem;
+	}
+}
+@media (min-width: 80rem) {
+	.custom_container {
+		max-width: 68rem;
+	}
+}
+@media (min-width: 96rem) {
+	.custom_container {
+		max-width: 80rem;
+	}
 }
