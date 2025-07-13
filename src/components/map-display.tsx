@@ -1,5 +1,4 @@
 "use client";
-import "@/lib/fixLeafletIcon";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import L from "leaflet";
