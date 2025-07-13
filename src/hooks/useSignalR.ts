@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from "react";
 import * as signalR from "@microsoft/signalr";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useSignalR = (onReceive: (data: any) => void) => {
 	const connectionRef = useRef<signalR.HubConnection | null>(null);
 
@@ -13,12 +13,14 @@ export const useSignalR = (onReceive: (data: any) => void) => {
 
 		connection.start().then(() => {
 			console.log("SignalR connected");
+
 			connection.on("ReceiveLatLon", (payload) => {
 				onReceive(payload);
 			});
 		});
 
 		connectionRef.current = connection;
+
 		return () => {
 			connection.stop();
 		};

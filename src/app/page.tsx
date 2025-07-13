@@ -1,4 +1,4 @@
-import Receiver from "@/components/reveiver";
+import Receiver from "@/components/receiver";
 import Sender from "@/components/sender";
 import Container from "@/components/shared/container";
 

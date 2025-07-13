@@ -46,7 +46,7 @@ export default function UsersFeed() {
 
 	return (
 		<div className="max-w-2xl mx-auto py-4 space-y-4">
-			{data.pages.map((page: TServerResponse) =>
+			{data?.pages?.map((page: TServerResponse) =>
 				page.users.map((user) => <UserCard key={user.id} user={user} />)
 			)}
 			{isFetchingNextPage && <Skeleton />}

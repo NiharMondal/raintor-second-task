@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
+
 import { LatLngExpression } from "leaflet";
 import { useSignalR } from "@/hooks/useSignalR";
+// import MapDisplay from "./map-display";
 
-const MapDisplay = dynamic(() => import("./map-display"), {
-	ssr: false,
-});
+import dynamic from "next/dynamic";
+
+const MapDisplay = dynamic(() => import("./map-display"), { ssr: false });
 
 export default function Receiver() {
 	const [position, setPosition] = useState<LatLngExpression | null>(null);
 	const [userName, setUserName] = useState("");
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleReceive = (payload: any) => {
 		setPosition([payload.lat, payload.lon]);
 		setUserName(payload.userName);
@@ -23,11 +25,11 @@ export default function Receiver() {
 	return (
 		<div className="p-4">
 			<h2>Receiver (User B)</h2>
-			{position ? (
-				<MapDisplay position={position} userName={userName} />
-			) : (
-				<p>Waiting for location updates...</p>
-			)}
+
+			<MapDisplay
+				position={position || [25.73736464, 90.3644747]}
+				userName={userName}
+			/>
 		</div>
 	);
 }

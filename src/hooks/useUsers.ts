@@ -1,9 +1,9 @@
-import { TServerResponse } from "@/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-const fetchUsers = async ({ pageParam = 0 }): Promise<TServerResponse> => {
+const fetchUsers = async ({ pageParam = 0 }) => {
 	const res = await fetch(
-		`https://tech-test.raintor.com/api/users/GetUsersList?take=10&skip=${pageParam}`
+		`https://tech-test.raintor.com/api/users/GetUsersList?take=10&skip=${pageParam}`,
+		{ method: "GET", credentials: "include" }
 	);
 	const data = await res.json();
 
@@ -14,9 +14,10 @@ export const useUsers = () => {
 	return useInfiniteQuery({
 		queryKey: ["users"],
 		queryFn: fetchUsers,
-		getNextPageParam: (data: TServerResponse) => {
+		getNextPageParam: (data) => {
 			const nextSkip = data.skip + data.users.length;
 			return nextSkip < data.total ? nextSkip : undefined;
 		},
+		initialPageParam: 0,
 	});
 };
